@@ -39,11 +39,13 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 	public Image astroPic;
-
+    public Image soccerballPic;
+    public Image soccerPlayerPic;
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private Astronaut astro;
-
+    private soccerball soccerball;
+    private soccerplayer soccerPlayer1;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -65,8 +67,11 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
 		astro = new Astronaut(10,100);
-
-
+        soccerballPic = Toolkit.getDefaultToolkit().getImage("Soccerball.png");
+        soccerball = new soccerball(10,10);
+       // fieldPic = Toolkit.getDefaultToolkit().getImage("");
+        soccerPlayer1 = new soccerplayer(100,30);
+        soccerballPic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer1.png");
 	}// BasicGameApp()
 
    
@@ -93,7 +98,7 @@ public class BasicGameApp implements Runnable {
 	{
       //calls the move( ) code in the objects
 		astro.move();
-
+        soccerball.move();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -142,10 +147,12 @@ public class BasicGameApp implements Runnable {
 		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image of the astronaut
+      //draw the image
 		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
+        g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
+        g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
 
-		g.dispose();
+        g.dispose();
 
 		bufferStrategy.show();
 	}
