@@ -69,8 +69,8 @@ public class BasicGameApp implements Runnable {
         soccerballPic = Toolkit.getDefaultToolkit().getImage("Soccerball.png");
         soccerball = new soccerball(10,10);
        // fieldPic = Toolkit.getDefaultToolkit().getImage("");
-        soccerPlayer1 = new soccerplayer(100,30);
-        soccerballPic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer1.png");
+        soccerPlayer1 = new soccerplayer(100,300);
+        soccerPlayerPic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer1.png");
 	}// BasicGameApp()
 
    
