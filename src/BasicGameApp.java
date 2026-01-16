@@ -38,12 +38,12 @@ public class BasicGameApp implements Runnable {
    public JPanel panel;
    
 	public BufferStrategy bufferStrategy;
-	public Image astroPic;
+
     public Image soccerballPic;
     public Image soccerPlayerPic;
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
-	private Astronaut astro;
+
     private soccerball soccerball;
     private soccerplayer soccerPlayer1;
 
@@ -65,8 +65,7 @@ public class BasicGameApp implements Runnable {
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
-		astroPic = Toolkit.getDefaultToolkit().getImage("astronaut.png"); //load the picture
-		astro = new Astronaut(10,100);
+
         soccerballPic = Toolkit.getDefaultToolkit().getImage("Soccerball.png");
         soccerball = new soccerball(10,10);
        // fieldPic = Toolkit.getDefaultToolkit().getImage("");
@@ -97,7 +96,7 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		astro.move();
+
         soccerball.move();
 	}
 	
@@ -148,8 +147,7 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image
-		g.drawImage(astroPic, astro.xpos, astro.ypos, astro.width, astro.height, null);
-        g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
+		g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
         g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
 
         g.dispose();
