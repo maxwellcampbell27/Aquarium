@@ -12,8 +12,8 @@ public class soccerplayer {
     public soccerplayer(int pXpos, int pYpos) {
         xpos = pXpos;
         ypos = pYpos;
-        dx = 1;
-        dy = 0;
+        dx = 3;
+        dy = 6;
         width = 60;
         height = 60;
         isAlive = true;

@@ -39,13 +39,16 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 
+   // public Image soccerfield;
     public Image soccerballPic;
     public Image soccerPlayerPic;
+    public Image soccerPlayer2Pic;
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 
     private soccerball soccerball;
     private soccerplayer soccerPlayer1;
+    private soccerplayer soccerPlayer2;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -60,17 +63,19 @@ public class BasicGameApp implements Runnable {
    // This section is the setup portion of the program
    // Initialize your variables and construct your program objects here.
 	public BasicGameApp() {
-      
+
       setUpGraphics();
        
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 
         soccerballPic = Toolkit.getDefaultToolkit().getImage("Soccerball.png");
+        //soccerfield = Toolkit.getDefaultToolkit().getImage("Soccerfield.png");
         soccerball = new soccerball(10,10);
-       // fieldPic = Toolkit.getDefaultToolkit().getImage("");
         soccerPlayer1 = new soccerplayer(100,300);
         soccerPlayerPic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer1.png");
+        soccerPlayer2 = new soccerplayer(500,10);
+        soccerPlayer2Pic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer2.png");
 	}// BasicGameApp()
 
    
@@ -98,6 +103,8 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 
         soccerball.move();
+        soccerPlayer1.move();
+      soccerPlayer2.move();
 	}
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -149,6 +156,8 @@ public class BasicGameApp implements Runnable {
       //draw the image
 		g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
         g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
+        g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
+       // g.drawImage(soccerfield, 0, 0,  WIDTH, HEIGHT, null);
 
         g.dispose();
 
