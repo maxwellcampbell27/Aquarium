@@ -154,10 +154,11 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image
+        // g.drawImage(soccerfield, 0, 0,  WIDTH, HEIGHT, null);
 		g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
         g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
         g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
-       // g.drawImage(soccerfield, 0, 0,  WIDTH, HEIGHT, null);
+
 
         g.dispose();
 

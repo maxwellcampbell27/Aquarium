@@ -18,13 +18,30 @@ public class soccerplayer {
         height = 60;
         isAlive = true;
 
-
-
     }
 
-    public void move() {
-        xpos = xpos + dx;
-        ypos = ypos + dy;
-    }
+
+public void move(){
+            if (xpos < 0) { //bounce off the left wall
+                dx = -dx;
+            }
+
+            //bounce off right wall
+            if (xpos > 950) {
+                dx = -dx;
+            }
+            //bounce off top wall
+            if (ypos < 0) {
+                dy = -dy;
+            }
+            //bounce off the bottom wall
+            if (ypos > 600) {
+                dy = -dy;
+            }
+            xpos = xpos + dx;
+            ypos = ypos + dy;
+        }
+
+
 
 }
