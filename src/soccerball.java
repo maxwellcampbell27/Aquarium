@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class soccerball {
 
 
@@ -11,7 +13,7 @@ public class soccerball {
     public int width;
     public int height;
     public boolean isAlive;             //a boolean to denote if the hero is alive or dead.
-
+    public Rectangle hitbox;
 
     // Constructor Definition
     // A constructor builds the object when called and sets variable values.
@@ -27,11 +29,28 @@ public class soccerball {
         width = 50;
         height = 50;
         isAlive = true;
+        hitbox = new Rectangle(xpos,ypos,width,height);
+    }
 
-    } // constructor
+    // constructor
+    public void move(){
+        if (xpos < 0) { //bounce off the left wall
+            dx = -dx;
+        }
 
+        //bounce off right wall
+        if (xpos > 950) {
+            dx = -dx;
+        }
+        //bounce off top wall
+        if (ypos < 0) {
+            dy = -dy;
+        }
+        //bounce off the bottom wall
+        if (ypos > 650) {
+            dy = -dy;
+        }
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
-    public void move() {
         xpos = xpos + dx;
         ypos = ypos + dy;
 

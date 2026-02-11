@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class soccerplayer {
 
     public String name;                //holds the name of the hero
@@ -8,6 +10,7 @@ public class soccerplayer {
     public int width;
     public int height;
     public boolean isAlive;
+    public Rectangle hitbox;
 
     public soccerplayer(int pXpos, int pYpos) {
         xpos = pXpos;
@@ -35,7 +38,7 @@ public void move(){
                 dy = -dy;
             }
             //bounce off the bottom wall
-            if (ypos > 600) {
+            if (ypos > 650) {
                 dy = -dy;
             }
             xpos = xpos + dx;

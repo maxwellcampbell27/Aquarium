@@ -94,6 +94,7 @@ public class BasicGameApp implements Runnable {
          moveThings();  //move all the game objects
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
+         bounce();
 		}
 	}
 
@@ -106,6 +107,19 @@ public class BasicGameApp implements Runnable {
         soccerPlayer1.move();
       soccerPlayer2.move();
 	}
+
+    public void bounce(){
+
+        if(soccerPlayer1.hitbox.intersects(soccerPlayer2.hitbox)) {
+            soccerPlayer1.dx = -soccerPlayer1.dx;
+            soccerPlayer2.dx = -soccerPlayer2.dx;
+            soccerPlayer1.dy = -soccerPlayer1.dx;
+            soccerPlayer2.dy = -soccerPlayer2.dy;
+        }
+
+
+
+    }
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
@@ -158,7 +172,8 @@ public class BasicGameApp implements Runnable {
 		g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
         g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
         g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
-
+        g.drawRect(soccerPlayer1.hitbox.x, soccerPlayer1.hitbox.y,soccerPlayer1.hitbox.width, soccerPlayer1.hitbox.height);
+        g.drawRect(soccerPlayer2.hitbox.x, soccerPlayer2.hitbox.y,soccerPlayer2.hitbox.width, soccerPlayer2.hitbox.height);
 
         g.dispose();
 
