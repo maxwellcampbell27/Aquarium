@@ -54,5 +54,7 @@ public class soccerball {
         xpos = xpos + dx;
         ypos = ypos + dy;
 
+        hitbox = new Rectangle(xpos,ypos,width,height);
+
     }
 }

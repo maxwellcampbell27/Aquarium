@@ -49,6 +49,8 @@ public class BasicGameApp implements Runnable {
     private soccerball soccerball;
     private soccerplayer soccerPlayer1;
     private soccerplayer soccerPlayer2;
+    public  int player1Score=0;
+    public int player2Score=0;
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -106,6 +108,7 @@ public class BasicGameApp implements Runnable {
         soccerball.move();
         soccerPlayer1.move();
       soccerPlayer2.move();
+
 	}
 
     public void bounce(){
@@ -174,7 +177,8 @@ public class BasicGameApp implements Runnable {
         g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
         g.drawRect(soccerPlayer1.hitbox.x, soccerPlayer1.hitbox.y,soccerPlayer1.hitbox.width, soccerPlayer1.hitbox.height);
         g.drawRect(soccerPlayer2.hitbox.x, soccerPlayer2.hitbox.y,soccerPlayer2.hitbox.width, soccerPlayer2.hitbox.height);
-
+        g.setColor(Color.BLACK);
+        g.drawString("SCORE "+ player1Score + "-" + player2Score,+100, 100);
         g.dispose();
 
 		bufferStrategy.show();

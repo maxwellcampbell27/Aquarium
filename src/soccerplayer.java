@@ -20,7 +20,7 @@ public class soccerplayer {
         width = 60;
         height = 60;
         isAlive = true;
-
+        hitbox = new Rectangle(xpos,ypos,width,height);
     }
 
 
@@ -43,6 +43,8 @@ public void move(){
             }
             xpos = xpos + dx;
             ypos = ypos + dy;
+
+    hitbox = new Rectangle(xpos,ypos,width,height);
         }
 
 
