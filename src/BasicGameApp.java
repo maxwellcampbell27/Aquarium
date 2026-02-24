@@ -1,7 +1,7 @@
 //Basic Game Application
 //Version 2
 // Basic Object, Image, Movement
-// Astronaut moves to the right.
+
 // Threaded
 
 //K. Chun 8/2018
@@ -39,18 +39,24 @@ public class BasicGameApp implements Runnable {
    
 	public BufferStrategy bufferStrategy;
 
-   // public Image soccerfield;
+   public Image soccerfield;
     public Image soccerballPic;
     public Image soccerPlayerPic;
     public Image soccerPlayer2Pic;
+    public Image goalPic;
+    public Image goal2Pic;
+
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 
     private soccerball soccerball;
     private soccerplayer soccerPlayer1;
     private soccerplayer soccerPlayer2;
-    public  int player1Score=0;
-    public int player2Score=0;
+    public goal goal1;
+    public goal goal2;
+    public  int player1Score= 0;
+    public int player2Score= 0;
+
 
    // Main method definition
    // This is the code that runs first and automatically
@@ -72,12 +78,16 @@ public class BasicGameApp implements Runnable {
       //create (construct) the objects needed for the game and load up 
 
         soccerballPic = Toolkit.getDefaultToolkit().getImage("Soccerball.png");
-        //soccerfield = Toolkit.getDefaultToolkit().getImage("Soccerfield.png");
-        soccerball = new soccerball(10,10);
+        soccerfield = Toolkit.getDefaultToolkit().getImage("Soccerfield.png");
+        soccerball = new soccerball(450,250);
         soccerPlayer1 = new soccerplayer(100,300);
         soccerPlayerPic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer1.png");
         soccerPlayer2 = new soccerplayer(500,10);
         soccerPlayer2Pic = Toolkit.getDefaultToolkit().getImage("SoccerPlayer2.png");
+        goal1 = new goal(1, 250);
+        goalPic = Toolkit.getDefaultToolkit().getImage("goal.png");
+        goal2 = new goal(910, 250);
+        goal2Pic = Toolkit.getDefaultToolkit().getImage("goal2.png");
 	}// BasicGameApp()
 
    
@@ -97,6 +107,7 @@ public class BasicGameApp implements Runnable {
          render();  // paint the graphics
          pause(20); // sleep for 10 ms
          bounce();
+         score();
 		}
 	}
 
@@ -115,11 +126,49 @@ public class BasicGameApp implements Runnable {
 
         if(soccerPlayer1.hitbox.intersects(soccerPlayer2.hitbox)) {
             soccerPlayer1.dx = -soccerPlayer1.dx;
+            soccerPlayer1.dy = -soccerPlayer1.dy;
+        }
+        if(soccerPlayer1.hitbox.intersects(goal1.hitbox)) {
+            soccerPlayer1.dx = -soccerPlayer1.dx;
+            soccerPlayer1.dy = -soccerPlayer1.dy;
+
+        }
+        if(soccerPlayer1.hitbox.intersects(goal2.hitbox)) {
+            soccerPlayer1.dx = -soccerPlayer1.dx;
+            soccerPlayer1.dy = -soccerPlayer1.dy;
+        }
+        if(soccerPlayer2.hitbox.intersects(goal1.hitbox)) {
             soccerPlayer2.dx = -soccerPlayer2.dx;
-            soccerPlayer1.dy = -soccerPlayer1.dx;
+            soccerPlayer2.dy = -soccerPlayer2.dy;
+
+        }
+        if(soccerPlayer2.hitbox.intersects(goal2.hitbox)) {
+            soccerPlayer2.dx = -soccerPlayer2.dx;
             soccerPlayer2.dy = -soccerPlayer2.dy;
         }
+//soccerball bounce
+        if(soccerball.hitbox.intersects(soccerPlayer1.hitbox)){
+            soccerball.dx = -soccerball.dx;
+            soccerball.dy = -soccerball.dy;
+        }
+        if(soccerball.hitbox.intersects(soccerPlayer2.hitbox)) {
+            soccerball.dx = -soccerball.dx;
+            soccerball.dy = -soccerball.dy;
 
+        }
+
+    }
+    public void score(){
+
+
+        if(soccerball.hitbox.intersects(goal1.hitbox) && soccerball.isCrashing == true){
+            player1Score = player1Score+ 1;
+            System.out.println();
+        }
+        if(soccerball.hitbox.intersects(goal2.hitbox) && soccerball.isCrashing == true){
+            player2Score = player2Score + 1;
+            System.out.println();
+        }
 
 
     }
@@ -171,12 +220,17 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image
-        // g.drawImage(soccerfield, 0, 0,  WIDTH, HEIGHT, null);
+        g.drawImage(soccerfield, 0, 0,  WIDTH, HEIGHT, null);
 		g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
         g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
         g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
         g.drawRect(soccerPlayer1.hitbox.x, soccerPlayer1.hitbox.y,soccerPlayer1.hitbox.width, soccerPlayer1.hitbox.height);
         g.drawRect(soccerPlayer2.hitbox.x, soccerPlayer2.hitbox.y,soccerPlayer2.hitbox.width, soccerPlayer2.hitbox.height);
+        g.drawRect(soccerball.hitbox.x,soccerball.hitbox.y, soccerball.hitbox.width, soccerball.hitbox.height);
+        g.drawImage(goalPic,goal1.xpos,goal1.ypos, goal1.width,goal1.height,null);
+        g.drawImage(goal2Pic,goal2.xpos,goal2.ypos, goal2.width,goal2.height,null);
+        g.drawRect(goal1.hitbox.x, goal1.hitbox.y,goal1.hitbox.width, goal1.hitbox.height);
+        g.drawRect(goal2.hitbox.x, goal2.hitbox.y,goal2.hitbox.width, goal2.hitbox.height);
         g.setColor(Color.BLACK);
         g.drawString("SCORE "+ player1Score + "-" + player2Score,+100, 100);
         g.dispose();
