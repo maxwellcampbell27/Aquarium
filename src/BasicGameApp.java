@@ -162,6 +162,7 @@ public class BasicGameApp implements Runnable {
 
 
         if(soccerball.hitbox.intersects(goal1.hitbox) && soccerball.isCrashing == true){
+            soccerball.isCrashing = true;
             player1Score = player1Score+ 1;
             System.out.println();
         }
