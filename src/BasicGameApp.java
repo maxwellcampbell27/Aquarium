@@ -167,6 +167,7 @@ public class BasicGameApp implements Runnable {
             System.out.println();
         }
         if(soccerball.hitbox.intersects(goal2.hitbox) && soccerball.isCrashing == true){
+            soccerball.isCrashing = true;
             player2Score = player2Score + 1;
             System.out.println();
         }
@@ -191,7 +192,6 @@ public class BasicGameApp implements Runnable {
       panel = (JPanel) frame.getContentPane();  //sets up a JPanel which is what goes in the frame
       panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));  //sizes the JPanel
       panel.setLayout(null);   //set the layout
-   
       // creates a canvas which is a blank rectangular area of the screen onto which the application can draw
       // and trap input events (Mouse and Keyboard events)
       canvas = new Canvas();  
