@@ -13,8 +13,13 @@
 
 //Graphics Libraries
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferStrategy;
 import java.awt.*;
+import java.security.Key;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -22,7 +27,7 @@ import javax.swing.JPanel;
 //*******************************************************************************
 // Class Definition Section
 
-public class BasicGameApp implements Runnable {
+public class BasicGameApp implements Runnable, KeyListener {
 
    //Variable Definition Section
    //Declare the variables used in the program 
@@ -161,18 +166,22 @@ public class BasicGameApp implements Runnable {
     public void score(){
 
 
-        if(soccerball.hitbox.intersects(goal1.hitbox) && soccerball.isCrashing == true){
-            soccerball.isCrashing = true;
+        if(soccerball.hitbox.intersects(goal1.hitbox) && goal1.isCrashing == false){
+           goal1.isCrashing = true;
             player1Score = player1Score+ 1;
             System.out.println();
         }
-        if(soccerball.hitbox.intersects(goal2.hitbox) && soccerball.isCrashing == true){
-            soccerball.isCrashing = true;
+        if(soccerball.hitbox.intersects(goal2.hitbox) && goal2.isCrashing == false){
+            goal2.isCrashing = true;
             player2Score = player2Score + 1;
             System.out.println();
         }
-
-
+        if(!goal1.hitbox.intersects(soccerball.hitbox)){
+            goal1.isCrashing = false;
+        }
+        if(!goal2.hitbox.intersects(soccerball.hitbox)) {
+            goal2.isCrashing = false;
+        }
     }
 	
    //Pauses or sleeps the computer for the amount specified in milliseconds
@@ -197,6 +206,7 @@ public class BasicGameApp implements Runnable {
       canvas = new Canvas();  
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
+      canvas.addKeyListener(this);
    
       panel.add(canvas);  // adds the canvas to the panel.
    
@@ -238,4 +248,35 @@ public class BasicGameApp implements Runnable {
 
 		bufferStrategy.show();
 	}
+
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 38) {
+            System.out.println("going up");
+            soccerPlayer1.isNorth = true;
+        }
+
+        if (e.getKeyCode() == 39) {
+            System.out.println("going right");
+            soccerPlayer1.isEast = true;
+        }
+        if (e.getKeyCode() == 40) {
+            System.out.println("going down");
+            soccerPlayer1.isSouth = true;
+        }
+        if (e.getKeyCode() == 37) {
+            System.out.println("going left");
+            soccerPlayer1.isWest = true;
+        }
+    }
+    @Override
+    public void keyReleased(KeyEvent e) {
+
+    }
 }

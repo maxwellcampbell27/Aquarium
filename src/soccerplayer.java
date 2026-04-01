@@ -10,6 +10,10 @@ public class soccerplayer {
     public int height;
     public boolean isAlive;
     public Rectangle hitbox;
+    public boolean isEast;
+    public boolean isWest;
+    public boolean isNorth;
+    public boolean isSouth;
 
     public soccerplayer(int pXpos, int pYpos) {
         xpos = pXpos;

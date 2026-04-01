@@ -20,7 +20,7 @@ public class goal {
         height = 250;
         isAlive = false;
         hitbox = new Rectangle(xpos,ypos,width,height);
-        isCrashing = true;
+        isCrashing = false;
     }
 
 }
