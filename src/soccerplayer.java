@@ -28,6 +28,27 @@ public class soccerplayer {
 
 
 public void move(){
+
+
+    if (isNorth == true) {
+        dy = -2;
+    }
+    if (isNorth == false && isSouth == false) {
+        dy = 0;
+    }
+    if (isSouth == true) {
+        dy = 5;
+    }
+    if (isEast == true) {
+        dx = 5;
+    }
+    if (isEast == false && isWest == false) {
+        dx = 0;
+    }
+
+    if (isWest == true) {
+        dx = -5;
+    }
             if (xpos < 0) { //bounce off the left wall
                 dx = -dx;
             }
