@@ -258,20 +258,20 @@ public class BasicGameApp implements Runnable, KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == 38) {
-            System.out.println("going up");
+            System.out.println("Player 1 is going up the field");
             soccerPlayer1.isNorth = true;
         }
 
         if (e.getKeyCode() == 39) {
-            System.out.println("going right");
+            System.out.println("Player 1 is going right");
             soccerPlayer1.isEast = true;
         }
         if (e.getKeyCode() == 40) {
-            System.out.println("going down");
+            System.out.println("Player 1 is going down the field");
             soccerPlayer1.isSouth = true;
         }
         if (e.getKeyCode() == 37) {
-            System.out.println("going left");
+            System.out.println("Player 1 is going left");
             soccerPlayer1.isWest = true;
         }
     }
