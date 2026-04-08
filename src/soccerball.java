@@ -12,7 +12,7 @@ public class soccerball {
     public int dy;                    //the speed of the ball in the y direction
     public int width;
     public int height;
-    public boolean isAlive;             //a boolean to denote if the ball is alive or dead.
+    public boolean isAlive;        //a boolean to denote if the ball is alive or dead.
     public Rectangle hitbox;
     public boolean isCrashing = true;
 
@@ -55,7 +55,7 @@ public class soccerball {
 
         //wrapping horizontally
 
-        if(xpos>900){
+        if (xpos>900){
             xpos = -width;
         }
 
@@ -65,7 +65,7 @@ public class soccerball {
 
         }
 
-        if(xpos<-900){
+        if (xpos<-900){
             xpos = -width;
             ypos=-1;
         }
