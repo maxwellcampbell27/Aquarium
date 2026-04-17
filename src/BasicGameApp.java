@@ -271,8 +271,26 @@ public class BasicGameApp implements Runnable, KeyListener {
             soccerPlayer1.isSouth = true;
         }
         if (e.getKeyCode() == 37) {
-            System.out.println("Player 1 is going left");
+            System.out.println("Player 2 is going left");
             soccerPlayer1.isWest = true;
+        }
+        if (e.getKeyCode() == 38) {
+            System.out.println("Player 2 is going up the field");
+            soccerPlayer2.isNorth = true;
+        }
+
+        if (e.getKeyCode() == 39) {
+            System.out.println("Player 2 is going right");
+            soccerPlayer2.isEast = true;
+        }
+        if (e.getKeyCode() == 40) {
+            System.out.println("Player 2 is going down the field");
+            soccerPlayer2.isSouth = true;
+        }
+        if (e.getKeyCode() == 37) {
+            System.out.println("Player 2 is going left");
+            soccerPlayer2.isWest = true;
+            //TODO: Change the Key code from arrows to WASD
         }
     }
     @Override
