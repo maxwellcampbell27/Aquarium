@@ -61,6 +61,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public goal goal2;
     public  int player1Score= 0;
     public int player2Score= 0;
+    public boolean startGame;
+    public Rectangle startHitbox;
 
 
    // Main method definition
@@ -227,26 +229,28 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 	//paints things on the screen using bufferStrategy
 	private void render() {
-		Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-		g.clearRect(0, 0, WIDTH, HEIGHT);
+        if (startGame == true) {
+            Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+            g.clearRect(0, 0, WIDTH, HEIGHT);
 
-      //draw the image
-        g.drawImage(soccerfield, 0, 0,  WIDTH, HEIGHT, null);
-		g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
-        g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
-        g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
-        g.drawRect(soccerPlayer1.hitbox.x, soccerPlayer1.hitbox.y,soccerPlayer1.hitbox.width, soccerPlayer1.hitbox.height);
-        g.drawRect(soccerPlayer2.hitbox.x, soccerPlayer2.hitbox.y,soccerPlayer2.hitbox.width, soccerPlayer2.hitbox.height);
-        g.drawRect(soccerball.hitbox.x,soccerball.hitbox.y, soccerball.hitbox.width, soccerball.hitbox.height);
-        g.drawImage(goalPic,goal1.xpos,goal1.ypos, goal1.width,goal1.height,null);
-        g.drawImage(goal2Pic,goal2.xpos,goal2.ypos, goal2.width,goal2.height,null);
-        g.drawRect(goal1.hitbox.x, goal1.hitbox.y,goal1.hitbox.width, goal1.hitbox.height);
-        g.drawRect(goal2.hitbox.x, goal2.hitbox.y,goal2.hitbox.width, goal2.hitbox.height);
-        g.setColor(Color.BLACK);
-        g.drawString("SCORE "+ player1Score + "-" + player2Score,+100, 100);
-        g.dispose();
+            //draw the image
+            g.drawImage(soccerfield, 0, 0, WIDTH, HEIGHT, null);
+            g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
+            g.drawImage(soccerPlayerPic, soccerPlayer1.xpos, soccerPlayer1.ypos, soccerPlayer1.width, soccerPlayer1.height, null);
+            g.drawImage(soccerPlayer2Pic, soccerPlayer2.xpos, soccerPlayer2.ypos, soccerPlayer2.width, soccerPlayer2.height, null);
+            g.drawRect(soccerPlayer1.hitbox.x, soccerPlayer1.hitbox.y, soccerPlayer1.hitbox.width, soccerPlayer1.hitbox.height);
+            g.drawRect(soccerPlayer2.hitbox.x, soccerPlayer2.hitbox.y, soccerPlayer2.hitbox.width, soccerPlayer2.hitbox.height);
+            g.drawRect(soccerball.hitbox.x, soccerball.hitbox.y, soccerball.hitbox.width, soccerball.hitbox.height);
+            g.drawImage(goalPic, goal1.xpos, goal1.ypos, goal1.width, goal1.height, null);
+            g.drawImage(goal2Pic, goal2.xpos, goal2.ypos, goal2.width, goal2.height, null);
+            g.drawRect(goal1.hitbox.x, goal1.hitbox.y, goal1.hitbox.width, goal1.hitbox.height);
+            g.drawRect(goal2.hitbox.x, goal2.hitbox.y, goal2.hitbox.width, goal2.hitbox.height);
+            g.setColor(Color.BLACK);
+            g.drawString("SCORE " + player1Score + "-" + player2Score, +100, 100);
+            g.dispose();
 
-		bufferStrategy.show();
+            bufferStrategy.show();
+        }
 	}
 
 
@@ -335,11 +339,17 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 //Mouse Listener - Used for gme startup
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        System.out.println(e.getPoint());
+        Rectangle pointhitbox = new Rectangle(e.getX(), e.getY(), 1, 1);
+        if (startHitbox.intersects(pointhitbox)) {
+            System.out.println("start game");
+            startGame = true;
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+
 
     }
 
@@ -358,3 +368,4 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     }
 }
+//todo: USE ARRAYS
