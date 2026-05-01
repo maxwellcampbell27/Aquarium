@@ -30,9 +30,9 @@ import javax.swing.JPanel;
 public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
    //Variable Definition Section
-   //Declare the variables used in the program 
+   //Declare the variables used in the program
    //You can set their initial values too
-   
+
    //Sets the width and height of the program window
 	final int WIDTH = 1000;
 	final int HEIGHT = 700;
@@ -41,7 +41,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 	public JFrame frame;
 	public Canvas canvas;
    public JPanel panel;
-   
+
 	public BufferStrategy bufferStrategy;
 
    public Image soccerfield;
@@ -69,7 +69,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
    // This is the code that runs first and automatically
 	public static void main(String[] args) {
 		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method  
+		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method
 	}
 
 
@@ -80,9 +80,9 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 	public BasicGameApp() {
 
       setUpGraphics();
-       
+
       //variable and objects
-      //create (construct) the objects needed for the game and load up 
+      //create (construct) the objects needed for the game and load up
 
         soccerballPic = Toolkit.getDefaultToolkit().getImage("Soccerball.png");
         soccerfield = Toolkit.getDefaultToolkit().getImage("Soccerfield.png");
@@ -95,9 +95,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         goalPic = Toolkit.getDefaultToolkit().getImage("goal.png");
         goal2 = new goal(910, 250);
         goal2Pic = Toolkit.getDefaultToolkit().getImage("goal2.png");
-	}// BasicGameApp()
+        startHitbox = new Rectangle(100,100,100,100);
+        startGame = false;
+	}
 
-   
+
 //*******************************************************************************
 //User Method Section
 //
@@ -185,7 +187,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             goal2.isCrashing = false;
         }
     }
-	
+
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
@@ -199,40 +201,42 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
    //Graphics setup method
    private void setUpGraphics() {
       frame = new JFrame("Application Template");   //Create the program window or frame.  Names it.
-   
+
       panel = (JPanel) frame.getContentPane();  //sets up a JPanel which is what goes in the frame
       panel.setPreferredSize(new Dimension(WIDTH, HEIGHT));  //sizes the JPanel
       panel.setLayout(null);   //set the layout
       // creates a canvas which is a blank rectangular area of the screen onto which the application can draw
       // and trap input events (Mouse and Keyboard events)
-      canvas = new Canvas();  
+      canvas = new Canvas();
       canvas.setBounds(0, 0, WIDTH, HEIGHT);
       canvas.setIgnoreRepaint(true);
       canvas.addKeyListener(this);
-   
+      canvas.addMouseListener(this);
+
       panel.add(canvas);  // adds the canvas to the panel.
-   
+
       // frame operations
       frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  //makes the frame close and exit nicely
       frame.pack();  //adjusts the frame and its contents so the sizes are at their default or larger
       frame.setResizable(false);   //makes it so the frame cannot be resized
       frame.setVisible(true);      //IMPORTANT!!!  if the frame is not set to visible it will not appear on the screen!
-      
+
       // sets up things so the screen displays images nicely.
       canvas.createBufferStrategy(2);
       bufferStrategy = canvas.getBufferStrategy();
       canvas.requestFocus();
       System.out.println("DONE graphic setup");
-   
+
    }
 
 
 	//paints things on the screen using bufferStrategy
 	private void render() {
+        Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
+        g.clearRect(0, 0, WIDTH, HEIGHT);
+        g.setColor(Color.blue);
+        g.fillRect(100, 100, 100, 100);
         if (startGame == true) {
-            Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
-            g.clearRect(0, 0, WIDTH, HEIGHT);
-
             //draw the image
             g.drawImage(soccerfield, 0, 0, WIDTH, HEIGHT, null);
             g.drawImage(soccerballPic, soccerball.xpos, soccerball.ypos, soccerball.width, soccerball.height, null);
@@ -247,10 +251,15 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             g.drawRect(goal2.hitbox.x, goal2.hitbox.y, goal2.hitbox.width, goal2.hitbox.height);
             g.setColor(Color.BLACK);
             g.drawString("SCORE " + player1Score + "-" + player2Score, +100, 100);
-            g.dispose();
 
-            bufferStrategy.show();
+
+
+
+
         }
+        bufferStrategy.show();
+
+        g.dispose();
 	}
 
 
@@ -336,21 +345,20 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 
     }
-//Mouse Listener - Used for gme startup
+
     @Override
     public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
         System.out.println(e.getPoint());
         Rectangle pointhitbox = new Rectangle(e.getX(), e.getY(), 1, 1);
         if (startHitbox.intersects(pointhitbox)) {
             System.out.println("start game");
             startGame = true;
         }
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-
-
     }
 
     @Override
@@ -368,4 +376,3 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
     }
 }
-//todo: USE ARRAYS
