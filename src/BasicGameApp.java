@@ -50,6 +50,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public Image soccerPlayer2Pic;
     public Image goalPic;
     public Image goal2Pic;
+    public Image fanPic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
@@ -63,6 +64,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
     public int player2Score= 0;
     public boolean startGame;
     public Rectangle startHitbox;
+    public Rectangle[] fans;
 
 
    // Main method definition
@@ -95,8 +97,45 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         goalPic = Toolkit.getDefaultToolkit().getImage("goal.png");
         goal2 = new goal(910, 250);
         goal2Pic = Toolkit.getDefaultToolkit().getImage("goal2.png");
+
         startHitbox = new Rectangle(100,100,100,100);
         startGame = false;
+
+        //draws array that creates the multiple strips of fans at the top and bottom
+        fanPic = Toolkit.getDefaultToolkit().getImage("fans.jpeg");
+
+        fans = new Rectangle[22];
+
+        fans[0] = new Rectangle(100, 0, 100, 20);
+        fans[1] = new Rectangle(200, 0, 100, 20);
+        fans[2] = new Rectangle(300, 0, 100, 20);
+        fans[3] = new Rectangle(400, 0, 100, 20);
+        fans[4] = new Rectangle(500, 0, 100, 20);
+        fans[5] = new Rectangle(600, 0, 100, 20);
+        fans[6] = new Rectangle(700, 0, 100, 20);
+        fans[7] = new Rectangle(800, 0, 100, 20);
+        fans[8] = new Rectangle(900, 0, 100, 20);
+        fans[9] = new Rectangle(1000, 0, 100, 20);
+        fans[10] = new Rectangle(0, 0, 100, 20);
+        fans[11] = new Rectangle(100, 685, 100, 20);
+        fans[12] = new Rectangle(200, 685, 100, 20);
+        fans[13] = new Rectangle(300, 685, 100, 20);
+        fans[14] = new Rectangle(400, 685, 100, 20);
+        fans[15] = new Rectangle(500, 685, 100, 20);
+        fans[16] = new Rectangle(600, 685, 100, 20);
+        fans[17] = new Rectangle(700, 685, 100, 20);
+        fans[18] = new Rectangle(800, 685, 100, 20);
+        fans[19] = new Rectangle(900, 685, 100, 20);
+        fans[20] = new Rectangle(1000, 685, 100, 20);
+        fans[21] = new Rectangle(0, 685, 100, 20);
+
+
+
+
+
+
+
+        // this live of code draws the fans
 	}
 
 
@@ -130,7 +169,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
       soccerPlayer2.move();
 
 	}
-
+// bounce() establishes the interactions between the players and the wall, the ball and the goal.
     public void bounce(){
 
         if(soccerPlayer1.hitbox.intersects(soccerPlayer2.hitbox)) {
@@ -167,6 +206,8 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         }
 
     }
+
+    // Score() sets up the scoring mechanic of the game by using hitboxes and if statements.
     public void score(){
 
 
@@ -231,6 +272,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 
 	//paints things on the screen using bufferStrategy
+    //render() renders all elements of the game. (Characters, background, start screen ect)
 	private void render() {
         Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
         g.clearRect(0, 0, WIDTH, HEIGHT);
@@ -252,7 +294,11 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
             g.setColor(Color.BLACK);
             g.drawString("SCORE " + player1Score + "-" + player2Score, +100, 100);
 
+for (int i = 0; i< fans.length; i++){
 
+    g.drawImage(fanPic, fans[i].x, fans[i].y,fans[i].width, fans[i].height,null);
+    // renders array(fans)
+}
 
 
 
@@ -262,12 +308,12 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
         g.dispose();
 	}
 
-
+// KeyListener allows for the keys to be used to interact with the soccer players
     @Override
     public void keyTyped(KeyEvent e) {
 
     }
-
+//keypressed allows for the soccer players to move, when the key corresponding with the number is pressed the soccerplayer moves in the direction of the key
     @Override
     public void keyPressed(KeyEvent e) {
         System.out.println("The key code is:" + e.getKeyCode());
@@ -306,6 +352,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
         }
     }
+    //KeyReleased prevents the soccerplayers from moving when the key is not pressed.
     @Override
     public void keyReleased(KeyEvent e) {
 
@@ -345,7 +392,7 @@ public class BasicGameApp implements Runnable, KeyListener, MouseListener {
 
 
     }
-
+//MouseClicked is used to create the blue square that starts the game, once clicked the game starts.
     @Override
     public void mouseClicked(MouseEvent e) {
 
